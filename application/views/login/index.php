@@ -1,45 +1,58 @@
-<div class="row">
-    <div class="col-lg-8 " id="login-form-kiri">
-        <img src="<?= base_url();?>assets/img/bg_pppomn.jpg" alt="">
-        <div id="text-login">
-            <h1>BPOM</h1>
-            <h6>SIMANTAP BMN</h6>
-        </div>
-    </div>
-    <div class="col-lg-4">
-        <div id="form-login"> 
-            <div class='text-center'>
-                <img src="<?= base_url();?>assets/img/logo.png" alt=""> <br>
-                <br>
+<div id="layoutAuthentication">
+            <div id="layoutAuthentication_content">
+                <main>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-5">
+                                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Login</h3></div>
+                                    <div class="card-body">
+                                        <form method='post'>
+                                        <?php if(!empty($this->session->flashdata('login') )) : ?>
 
-                <h5>Silahkan Login</h5>
-            </div>
+                                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                                <?=  $this->session->flashdata('login'); ?>
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
 
-            <div class="container">
-                <?php if(!empty($this->session->flashdata('login') )) : ?>
-                    
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <?=  $this->session->flashdata('login'); ?>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                                        <?php endif ; ?>
+
+                                            <div class="form-floating mb-3">
+                                                <label for="username">Username</label>
+                                                <input class="form-control" name='username' id="username" type="text" autofocus autocomplete='off' />
+                                            </div>
+                                            <div class="form-floating mb-3">
+                                                <label for="password">Password</label>
+                                                <input class="form-control" name='password' id="password" type="password" />
+                                            </div>
+                                            <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
+                                                <span></span>
+                                                <button class="btn btn-primary" type="submit">Login</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <br>
-                <?php endif ; ?>
-                
-                <form action="" method="post">
-                    <label for="username">Username / Email</label>
-                    <input type="text" name="username" id="username" class='form-control col-form-label-sm' placeholder="Username / Email" autocomplete='off'>
-                    <small id="usernameHelp" class="form-text text-danger"><?= form_error('username'); ?></small>
-                    <label for="password">Password</label>
-                    <input type="password" name="password" id="password" class='form-control col-form-label-sm' placeholder="Password">
-                    <small id="usernameHelp" class="form-text text-danger"><?= form_error('password'); ?></small>
-                    <br>
-                    <button class="btn btn-primary" type='submit'> login </button>
-                </form>
+                </main>
             </div>
-            <br>
-            <div class="bottomright">Manual Book</div>
+            <div id="layoutAuthentication_footer">
+                <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid px-4">
+                        <div class="d-flex align-items-center justify-content-center small">
+                            <div class="text-muted">Copyright &copy; Ridwan Hafifudin 2022</div>
+                            <!-- <div>
+                                <a href="#">Privacy Policy</a>
+                                &middot;
+                                <a href="#">Terms &amp; Conditions</a>
+                            </div> -->
+                        </div>
+                    </div>
+                </footer>
+            </div>
         </div>
-    </div>
-</div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="js/scripts.js"></script>

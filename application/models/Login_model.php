@@ -4,17 +4,15 @@
 
         public function cekLogin($name, $pass)
         {
-            $this->load->helper('security');
-            $pass = do_hash($pass, 'sha1') ;
+            $pass = md5(sha1($pass));
             $this->db->where("username", $name) ; //= '$name' OR 'email' = '$name' "
             $this->db->where('password', $pass);
             $query = $this->db->get('user')->row_array();
             if ($query){
     
                 $sesi = [
-                    'kunci' => $query['id_user'] ,
-                    'nama_user' => $query['nama_depan'].' '.$query['nama_blakang'],
-                    'namaLevel' => $query['nama_blakang']
+                    'id_user' => $query['id_user'] ,
+                    'nama_toko' => $query['nama_toko']
                 ] ;
                 $this->session->set_userdata($sesi);
                 redirect('home');

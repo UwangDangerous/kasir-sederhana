@@ -13,8 +13,8 @@
         
         <link rel="stylesheet" href="<?= base_url();?>assets/css/dataTables.bootstrap4.min.css">
 
-        <title><?= $judul ; ?></title>
-        <link rel="icon" href="<?= base_url();?>assets/img/logo-bpom.png">
+        <title><?= $judul; ?> <?= $this->session->userdata('nama_toko'); ?></title>
+        <link rel="icon" href="<?= base_url();?>assets/img/favicon.ico">
         
         <script src="<?= base_url(); ?>assets/js/jquery.js" ></script>
         

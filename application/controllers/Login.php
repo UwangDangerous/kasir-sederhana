@@ -10,13 +10,13 @@
 
         public function index()
         {
-            $data['judul'] = 'Login '.WEB; 
+            $data['judul'] = 'Login '; 
             $data['header'] = 'Login'; 
             // $data['bread'] = 'Dashboard'; 
 
             if( $this->session->userdata('kunci') == null ){
 
-                $this->form_validation->set_rules('username', 'Username / Email', 'required');
+                $this->form_validation->set_rules('username', 'Username', 'required');
                 $this->form_validation->set_rules('password', 'Password', 'required|min_length[5]');
 
                 if($this->form_validation->run() == FALSE) {

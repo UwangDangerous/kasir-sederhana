@@ -39,8 +39,8 @@
         <script>
             $(document).ready(function () {
                 $("#flexibel").select2({
-                    theme: 'bootstrap4',
-                    placeholder: "--Pilih--"
+                    theme: 'bootstrap4'
+                    // placeholder: "--Pilih--"
                 });
             });
         </script>
