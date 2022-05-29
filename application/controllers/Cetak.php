@@ -5,44 +5,21 @@
         {
             parent::__construct() ;
             $this->load->model("_Date") ; 
-            $this->load->model("_Code") ; 
-            $this->load->model("Cetak_model") ; 
         }
         
-        public function cetakBarangMasuk($id)
+        public function cetakNotaKeluar($kode)
         {
-            $this->load->model('BarangMasuk_model') ;
-            $data['item_brg_masuk'] = $this->BarangMasuk_model->getDataBarangMasukItem($id) ;
-            $data['barang_masuk'] = $this->BarangMasuk_model->getDetailBarangMasuk($id) ;
-            $this->load->view('cetak/cetakBarangMasuk', $data);
-        }
-        
-        public function cetakBarangKeluar($id)
-        {
-            $this->load->model('BarangKeluar_model') ;
-            $data['barang_keluar'] = $this->BarangKeluar_model->getDetailBarangKeluar($id) ;
-            $data['item_brg_keluar'] = $this->BarangKeluar_model->getDataItemBarangKeluar($id) ;
-            $this->load->view('cetak/cetakBarangKeluar', $data);
-        }
+            $data['kode'] = $kode ;
 
-        public function cetakLaporanBarangMasuk()
-        {
-            $this->load->model('Cetak_model') ;
-            $data['barang'] = $this->Cetak_model->getDataBarang() ;
-            $data['tgl1'] = $this->input->post('tgl1') ;
-            $data['tgl2'] = $this->input->post('tgl2') ;
+            $tanggal = explode(" ",$this->db->get_where('keluar', ['kode_keluar' => $kode])->row_array()['tgl_keluar'] ) ;
+            $data['tgl'] = $this->_Date->formatTanggal($tanggal[0]).' '.$tanggal[1];
 
-            $this->load->view('cetak/cetakLaporanBarangMasuk',$data) ; 
-        }
+            $this->db->where('keluar.kode_keluar', $kode) ;
+            $this->db->join('keluar', 'keluar.kode_keluar = keluar_item.kode_keluar') ;
+            $this->db->join('barang', 'barang.id_barang = keluar_item.id_barang') ;
+            $data['keluar'] = $this->db->get('keluar_item')->result_array() ;
 
-        public function cetakLaporanBarangKeluar()
-        {
-            $this->load->model('Cetak_model') ;
-            $data['barang'] = $this->Cetak_model->getDataBarang() ;
-            $data['tgl1'] = $this->input->post('tgl1') ;
-            $data['tgl2'] = $this->input->post('tgl2') ;
-
-            $this->load->view('cetak/cetakLaporanBarangKeluar',$data) ; 
+            $this->load->view('cetak/cetakNotaKeluar', $data);
         }
     }
 
