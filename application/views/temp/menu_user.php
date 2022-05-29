@@ -7,3 +7,7 @@
     <div class="sb-nav-link-icon"><i class="fas fa-store"></i></div>
     Barang Masuk
 </a>
+<a class="nav-link" href="<?= base_url(); ?>keluar">
+    <div class="sb-nav-link-icon"><i class="fab fa-sellsy"></i></div>
+    Barang Keluar
+</a>

@@ -17,7 +17,8 @@
             $query = [
                 'nama_barang' => $this->input->post('nama_barang', true) ,
                 'harga_jual' => $this->input->post('harga_jual', true) ,
-                'stok' => $this->input->post('stok') 
+                'stok' => $this->input->post('stok', true) ,
+                'satuan' => $this->input->post('satuan', true)
             ] ;
 
             if($this->db->insert('barang', $query)) {
@@ -41,7 +42,8 @@
             $query = [
                 'nama_barang' => $this->input->post('nama_barang', true) ,
                 'harga_jual' => $this->input->post('harga_jual', true) ,
-                'stok' => $this->input->post('stok') 
+                'stok' => $this->input->post('stok', true) ,
+                'satuan' => $this->input->post('satuan', true)
             ] ;
 
             $this->db->where('id_barang', $id) ;

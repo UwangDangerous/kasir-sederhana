@@ -25,6 +25,7 @@
         <link rel="stylesheet" href="<?= base_url(); ?>assets/jsDelivr/jsDelivr_select.css">
         <link rel="stylesheet" href="<?=base_url(); ?>assets/css/mystyle.css">
 
+        <script src="<?= base_url(); ?>assets/jsDelivr/jsDelivr_select.js"></script>
         <script src="<?= base_url(); ?>assets/tinymce/js/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
 
     </head> 

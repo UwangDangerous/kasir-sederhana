@@ -3,68 +3,47 @@
     class Masuk_model extends CI_Model{
         public function getDataMasuk()
         {
+            $this->db->where('id_user', $this->session->userdata('id_user')) ;
+            $this->db->order_by('tgl_masuk', 'desc') ;
             return $this->db->get('masuk')->result_array() ;
         }
 
-        public function getDataMasukEdit($id)
+        public function getRinciMasuk($kode)
         {
-            $this->db->where('id_masuk', $id) ;
+            $this->db->where('kode_masuk', $kode) ;
             return $this->db->get('masuk')->row_array() ;
         }
-
-        public function addMasuk()
+        
+        public function getDataItem($kode)
         {
-            $query = [
-                'nama_masuk' => $this->input->post('nama_masuk', true) ,
-                'harga_jual' => $this->input->post('harga_jual', true) ,
-                'stok' => $this->input->post('stok') 
-            ] ;
-
-            if($this->db->insert('masuk', $query)) {
-                $pesan = [
-                    'pesan' => 'Data Berhasil Disimpan' ,
-                    'warna' => 'success'
-                ];
-            }else{
-                $pesan = [
-                    'pesan' => 'Data Gagal Disimpan' ,
-                    'warna' => 'danger'
-                ];
-            }
-
-            $this->session->set_flashdata($pesan) ;
-            redirect("masuk") ;
+            $this->db->where('masuk.kode_masuk', $kode) ;
+            $this->db->join('masuk', 'masuk.kode_masuk = masuk_item.kode_masuk') ;
+            $this->db->join('barang', 'barang.id_barang = masuk_item.id_barang') ;
+            $this->db->select('masuk_item.kode_masuk as kode_masuk, qty, harga_beli, total_beli , nama_barang, satuan, id_masuk') ;
+            return $this->db->get('masuk_item')->result_array() ;
         }
 
-        public function editMasuk($id)
+        public function totalMasuk($kode)
         {
-            $query = [
-                'nama_masuk' => $this->input->post('nama_masuk', true) ,
-                'harga_jual' => $this->input->post('harga_jual', true) ,
-                'stok' => $this->input->post('stok') 
-            ] ;
-
-            $this->db->where('id_masuk', $id) ;
-            if($this->db->update('masuk', $query)) {
-                $pesan = [
-                    'pesan' => 'Data Berhasil Diubah' ,
-                    'warna' => 'success'
-                ];
+            $this->db->where('kode_masuk', $kode);
+            $this->db->select_sum('total_beli') ;
+            $total = $this->db->get('masuk_item')->row_array()['total_beli'];
+            
+            if($total == null){
+                return 0 ;
             }else{
-                $pesan = [
-                    'pesan' => 'Data Gagal Diubah' ,
-                    'warna' => 'danger'
-                ];
+                return $total ;
             }
-
-            $this->session->set_flashdata($pesan) ;
-            redirect("masuk") ;
         }
 
-        public function deleteMasuk($id)
+        public function deleteMasuk($kode)
         {
-            $this->db->where('id_masuk', $id) ;
+            $this->db->where('kode_masuk', $kode) ;
             if($this->db->delete('masuk')) {
+
+                $this->db->where('kode_masuk', $kode) ;
+                $this->db->delete('masuk_item') ;
+
                 $pesan = [
                     'pesan' => 'Data Berhasil Dihapus' ,
                     'warna' => 'success'
@@ -78,6 +57,24 @@
 
             $this->session->set_flashdata($pesan) ;
             redirect("masuk") ;
+        }
+
+        public function deleteMasukItem($id)
+        {
+            $this->db->where('id_masuk', $id) ;
+            if($this->db->delete('masuk_item')) {
+                $pesan = [
+                    'pesan' => 'Data Berhasil Dihapus' ,
+                    'warna' => 'success'
+                ];
+            }else{
+                $pesan = [
+                    'pesan' => 'Data Gagal Dihapus' ,
+                    'warna' => 'danger'
+                ];
+            }
+
+            $this->session->set_flashdata($pesan) ;
         }
     }
 

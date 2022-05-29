@@ -46,6 +46,7 @@
                 
                 $this->form_validation->set_rules('nama_barang', 'Nama Barang', 'required');
                 $this->form_validation->set_rules('harga_jual', 'Harga Jual', 'required');
+                $this->form_validation->set_rules('satuan', 'Satuan', 'required');
 
                 if($this->form_validation->run() == FALSE) {
                     $this->load->view('temp/header', $data) ;
@@ -79,6 +80,7 @@
                 
                 $this->form_validation->set_rules('nama_barang', 'Nama Barang', 'required');
                 $this->form_validation->set_rules('harga_jual', 'Harga Jual', 'required');
+                $this->form_validation->set_rules('satuan', 'Satuan', 'required');
 
                 if($this->form_validation->run() == FALSE) {
                     $this->load->view('temp/header', $data) ;

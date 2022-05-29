@@ -25,6 +25,7 @@
                     <th>Nama Barang</th>
                     <th>Harga Jual</th>
                     <th>Stok</th>
+                    <th>Satuan</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -36,6 +37,7 @@
                         <td><?= $row['nama_barang']; ?></td>
                         <td><?= $row['harga_jual']; ?></td>
                         <td><?= $row['stok']; ?></td>
+                        <td><?= $row['satuan']; ?></td>
                         <td>
                             <a href="<?= base_url();?>barang/ubah/<?= $row['id_barang'];?>" data-toggle='tooltip' title='Ubah Data Barang' class="badge badge-success"><i class="fa fa-edit"></i></a>
                             <a href="<?= base_url();?>barang/hapus/<?= $row['id_barang'];?>" data-toggle='tooltip' title='Hapus Data Barang' class="badge badge-danger" onclick="return confirm('Yakin?')"><i class="fa fa-trash"></i></a>
